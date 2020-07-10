@@ -9,8 +9,20 @@
     <p>Welcome to <%= title %></p>
     <a href='/new'>Add New Message</a>
     <% messages.forEach((item) => { %>
-      <p><%= item.user %>: <%= item.text %></p>
-      <p><%= item.added %></p><br>
+      <div class="container">
+        <div class='content'>
+          <div class='circle'><%= item.user.slice(0, 1).toUpperCase() %></div>
+          <p><%= item.user %></p>
+        </div>
+        <div class='content2'>
+          <p><%= item.text %></p>
+          <% if (moment(item.added).add(24, 'hours') < moment()) { %>
+            <p class='time'><%= moment(item.added).format('lll') %></p>
+          <% } else { %>
+            <p class='time'><%= moment(item.added).fromNow() %></p>
+          <% } %>
+        </div>
+      </div>
     <% }) %>
   </body>
 </html>
